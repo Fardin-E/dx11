@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "App.h"
 
 int CALLBACK WinMain(
 	HINSTANCE	hInstance,
@@ -8,26 +9,7 @@ int CALLBACK WinMain(
 {
 	try
 	{
-		Window wnd(800, 300, L"window");
-
-		MSG msg;
-		BOOL gResult;
-		while ((gResult) = GetMessage(&msg, nullptr, 0, 0) > 0)
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-			if (wnd.kbd.KeyIsPressed(VK_MENU))
-			{
-				MessageBoxA(nullptr, "Something Happened!", "Space Key was pressed", MB_OK | MB_ICONEXCLAMATION);
-			}
-		}
-
-		if (gResult == 1)
-		{
-			return -1;
-		}
-
-		return static_cast<int>(msg.wParam);
+		return App{}.Go();
 	}
 	catch (const CustomException &e)
 	{

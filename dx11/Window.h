@@ -3,6 +3,9 @@
 #include "WinHeader.h"
 #include "CustomException.h"
 #include "Keyboard.h"
+#include "Mouse.h"
+#include <sstream>
+#include <optional>
 
 class Window
 {
@@ -18,7 +21,6 @@ public:
 		std::string GetErrorString() const noexcept;
 	private:
 		HRESULT hr;
-
 	};
 private:
 	// singleton manages registration/cleanup of window class
@@ -41,7 +43,10 @@ public:
 	~Window();
 	Window(const Window &) = delete;
 	Window &operator=(const Window &) = delete;
+	void SetTitle(const std::wstring &title);
+	static std::optional<int> ProcessMessages();
 	Keyboard kbd;
+	Mouse mouse;
 private:
 	static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 	static LRESULT CALLBACK HandleMsgProcess(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;

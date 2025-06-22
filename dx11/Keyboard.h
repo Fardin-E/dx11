@@ -43,7 +43,7 @@ public:
 		}
 		unsigned char GetCode() const noexcept
 		{
-
+			return code;
 		}
 	};
 
@@ -79,5 +79,4 @@ private:
 	std::bitset<nKeys> keystates;
 	std::queue<Event> keybuffer;
 	std::queue<char> charbuffer;
-
 };
